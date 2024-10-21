@@ -18,18 +18,17 @@ const isInViewport = (element) => {
      */
 const Navbar = document.getElementsByClassName("navbar__menu");
 const Navlist = document.getElementById("navbar__list");
-const sections = []; // Array to store references to section elements
-    /** Loop to create buttons for each section*/
+const allSections = document.querySelectorAll('section[id^="section"]');
      /**
-     * @description Creates a button for each section and appends it to the navigation list.
-     * @param {number} i - The section number for which the button is created.
-     */
-for (let i = 1; i <= 3; i++) {
+      * Loop to create buttons for each section
+      * @description Creates a button for each section and appends it to the navigation list.
+      * @param {number} i - The section number for which the button is created.
+      */
+for (let i = 1; i <= allSections.length; i++) {
     let button = document.createElement('button');
     button.setAttribute('class', `section${i}`);
     button.innerHTML = `section${i}`;
     Navlist.appendChild(button);
-    sections.push(document.querySelector(`#section${i}`));
         /**
          * @description Scrolls to the specified section smoothly when the button is clicked.
          * @description:Add event listener for scrolling to the respective section
@@ -57,7 +56,7 @@ const checkSectionsVisibility = ()=> {
             /**
             * @returns: adding "active" class if the section is not visible
             */
-            section.classList.add("active");
+            section.setAttribute("class","active");
         } else {
              /**
              * @returns: Remove "active" class if the section is not visible

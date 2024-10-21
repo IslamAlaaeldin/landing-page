@@ -19,6 +19,7 @@ const isInViewport = (element) => {
 const Navbar = document.getElementsByClassName("navbar__menu");
 const Navlist = document.getElementById("navbar__list");
 const allSections = document.querySelectorAll('section[id^="section"]');
+const sections = Array.from(allSections);
      /**
       * Loop to create buttons for each section
       * @description Creates a button for each section and appends it to the navigation list.

@@ -84,7 +84,7 @@ section {
 
 /* responsive navigation bar */
 @media screen and (max-width: 1200px) {
-    .section1, .section2, .section3, .section4 {
+    button{
         width: 15vw;
         text-align: center;
         font-size: 2vw;
@@ -92,7 +92,7 @@ section {
 }
 
 @media screen and (min-width: 1201px) {
-    .section1, .section2, .section3, .section4 {
+    button {
         width: 15vw;
         text-align: center;
         font-size: 2vw;

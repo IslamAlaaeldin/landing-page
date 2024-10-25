@@ -1,20 +1,4 @@
     /**
-     * @description Checks if an element is fully visible in the viewport.
-     * @param {HTMLElement} element - The DOM element to check visibility for.
-     * @returns {boolean} True if the element is fully visible; otherwise, false.
-     */
-
-const isInViewport = (element) => {
-    const rect = element.getBoundingClientRect();
-    return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-};
-
-    /**
      * @description Manipulates the navigation bar by creating buttons
      * @description: that scroll to corresponding sections when clicked.
      */
@@ -24,25 +8,42 @@ const Navlist = document.getElementById("navbar__list");
 const allSections = document.querySelectorAll('section[id^="section"]');
 const sections = Array.from(allSections);
 
-     /**
-      * Loop to create buttons for each section
-      * @description Creates a button for each section and appends it to the navigation list.
-      * @param {number} i - The section number for which the button is created.
-      */
-
+    /**
+     * @description Checks if an element is fully visible in the viewport.
+     * @param {HTMLElement} element - The DOM element to check visibility for.
+     * @param  VALUE - this value based on how much the section needs to be in the viewport.
+     * @returns {boolean} True if the element is fully visible; otherwise, false.
+     */
+    
+const isInViewport = (element) => {
+        const box = element.getBoundingClientRect();
+        const VALUE = 150;
+        return (
+            box.top <= VALUE && box.bottom >= VALUE
+        );
+    };
+    
+        /**
+         * Loop to create buttons for each section
+         * @description Creates a button for each section and appends it to the navigation list.
+         * @param {number} i - The section number for which the button is created.
+         */
+    
 for (let i = 1; i <= allSections.length; i++) {
     let button = document.createElement('button');
+    let list =document.createElement('li');
     button.setAttribute('class', `section${i}`);
     button.innerHTML = `section${i}`;
-    Navlist.appendChild(button);
+    list.appendChild(button);
+    Navlist.appendChild(list);
     const Section = document.querySelector(`#section${i}`);
-
+    
         /**
          * @description Scrolls to the specified section smoothly when the button is clicked.
          * @description:Add event listener for scrolling to the respective section
          * @description timeout to make sure that section becomed visible 
          */
-
+    
     button.addEventListener("click", () => {
         if (Section) {Section.scrollIntoView({ behavior: "smooth" });}
         setTimeout(() => {
@@ -55,12 +56,12 @@ for (let i = 1; i <= allSections.length; i++) {
             }
         }, 1000);
     });
-
+    
         /**
          * @description Checks the visibility of each section and manages the "active" class.
          * @param section is section needed from sections array.
          */
-
+    
     const checkSectionsVisibility = ()=> {
             if (isInViewport(Section)) {
                 /**
@@ -75,13 +76,13 @@ for (let i = 1; i <= allSections.length; i++) {
                  */
                 Section.classList.remove("active");
                 button.classList.remove("active");
-
+    
             }
     }
-
+    
         /**
          * @returns: Adding scroll event listener to the window to check visibility of sections while scrolling
          */ 
-
+    
     window.addEventListener("scroll", checkSectionsVisibility);
 }
